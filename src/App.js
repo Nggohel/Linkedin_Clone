@@ -16,7 +16,8 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
-          <Route exact path="/home" element={<HomeLayout />}></Route>
+
+          <Route exact path="/home" element={<Home />}></Route>
         </Routes>
       </Router>
     </div>

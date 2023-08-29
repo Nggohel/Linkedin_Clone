@@ -2,30 +2,35 @@ import styled from "styled-components";
 import Leftside from "./Leftside";
 import Main from "./Main";
 import Rightside from "./Rightside";
+import Header from "./Header";
 const Home = (props) => {
   return (
-    <Container>
-      <Section>
-        <h5>
-          <a>Hiring in a hurry? - </a>
-        </h5>
-        <p>
-          Find talented pros in record time with Upwork and keep business
-          moving.
-        </p>
-      </Section>
-      <Layout>
-        <Leftside></Leftside>
-        <Main></Main>
-        <Rightside></Rightside>
-      </Layout>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Section>
+          <h5>
+            <a>Hiring in a hurry? - </a>
+          </h5>
+          <p>
+            Find talented pros in record time with Upwork and keep business
+            moving.
+          </p>
+        </Section>
+        <Layout>
+          <Leftside></Leftside>
+          <Main></Main>
+          <Rightside></Rightside>
+        </Layout>
+      </Container>
+    </>
   );
 };
 
 const Container = styled.div`
   padding-top: 52px;
   max-width: 100%;
+  margin: 55px 0 0 0;
 `;
 
 const Content = styled.div`
