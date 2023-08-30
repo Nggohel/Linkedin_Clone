@@ -68,9 +68,24 @@ const Main = (props) => {
               <a>2 comments</a>
             </li>
           </SocialCounts>
-          <button>
-            <img src="/images/like-icon.svg" alt="celebrate"></img>
-          </button>
+          <SocialAction>
+            <button>
+              <img src="/images/like-icon.svg" alt="celebrate"></img>
+              <span>like</span>
+            </button>
+            <button>
+              <img src="/images/comment-icon.svg" alt="celebrate"></img>
+              <span>comment</span>
+            </button>
+            <button>
+              <img src="/images/repost-icon.svg" alt=""></img>
+              <span>repost</span>
+            </button>
+            <button>
+              <img src="/images/share-icon.svg" alt="celebrate"></img>
+              <span>share</span>
+            </button>
+          </SocialAction>
         </Article>
       </div>
     </Container>
@@ -241,6 +256,24 @@ const SocialCounts = styled.ul`
   }
 `;
 
+const SocialAction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  min-height: 40px;
+  padding: 4px 8px;
+  button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    color: #0a66c2;
+
+    @media (min-width: 768px) {
+      margin-left: 8px;
+    }
+  }
+`;
 export default Main;
 
 // const ArtCard = styled.div`
