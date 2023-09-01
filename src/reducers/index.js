@@ -1,6 +1,7 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { useReducer } from "./useReducer";
+import { combineReducers } from "redux";
+import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
-  useState: useReducer,
+  userState: userReducer,
 });
+export default rootReducer;

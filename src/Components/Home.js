@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Leftside from "./Leftside";
 import Main from "./Main";
 import Rightside from "./Rightside";
 import Header from "./Header";
+import { connect } from "react-redux";
 const Home = (props) => {
+  const navigate = useNavigate();
+  if (!props.user) {
+    navigate("/");
+  }
   return (
     <>
       <Header />
@@ -66,7 +72,6 @@ const Section = styled.section`
     padding: 0 5px;
   }
 `;
-
 const Layout = styled.div`
   display: grid;
   grid-template-areas: "leftside main rightside";
@@ -81,4 +86,13 @@ const Layout = styled.div`
     padding: 0 5px;
   }
 `;
-export default Home;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

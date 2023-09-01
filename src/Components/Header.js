@@ -1,6 +1,8 @@
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { singOutAPI } from "../actions";
+
 const Header = (props) => {
   return (
     <>
@@ -51,14 +53,21 @@ const Header = (props) => {
                   <span>Notifications</span>
                 </a>
               </NavList>
+
               <User>
                 <a>
-                  <img src="/images/user.svg" alt="" />
-                  <span>Me</span>
-                  <img src="/images/down-icon.svg" alt="" />
+                  {props.user && props.user.photoURL ? (
+                    <img src={props.user.photoURL} alt="singimg" />
+                  ) : (
+                    <img src="/images/user.svg" alt="" />
+                  )}
+                  <span>
+                    Me
+                    <img src="/images/down-icon.svg" alt="" />
+                  </span>
                 </a>
 
-                <SignOut>
+                <SignOut onClick={() => props.singOut()}>
                   <a>Sign Out</a>
                 </SignOut>
               </User>
@@ -219,6 +228,7 @@ const SignOut = styled.div`
   transition-duration: 167ms;
   text-align: center;
   display: none;
+  cursor: pointer;
 `;
 const User = styled(NavList)`
   a > svg {
@@ -249,4 +259,14 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  singOut: () => dispatch(singOutAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

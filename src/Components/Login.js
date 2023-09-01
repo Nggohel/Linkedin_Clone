@@ -1,6 +1,13 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { connect } from "react-redux";
+import { singInAPI } from "../actions";
 const Login = (props) => {
+  const navigate = useNavigate();
+  if (props.user) {
+    navigate("/home");
+  }
   return (
     <Container>
       <Nav>
@@ -18,7 +25,7 @@ const Login = (props) => {
           <img src="/images/login-hero.svg" alt="" />
         </Hero>
         <From>
-          <Google>
+          <Google onClick={() => props.SingIn()}>
             <img src="/images/google.svg" alt="" />
             Sing In With Google
           </Google>
@@ -154,10 +161,22 @@ const Google = styled.button`
    transition-duration:167ms;
    font-size:20px;
    color:rgba(0,0,0,0.6);
+   cursor:pointer;
    &:hover{
     background-color:rgba(207,207,207,0.5);
     color:rgba(0,0,0,0.75);
    }
 
 `;
-export default Login;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  SingIn: () => dispatch(singInAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
