@@ -12,6 +12,7 @@ const PostModal = (props) => {
   const [shareImage, setShareImage] = useState("");
   const [videoLink, setVideoLink] = useState("");
   const [assetArea, setAssetArea] = useState("");
+  const [inProcess, setInProcess] = useState(false);
 
   const handleChange = (e) => {
     const image = e.target.files[0];
@@ -44,6 +45,9 @@ const PostModal = (props) => {
 
     props.postArticle(payload);
     reset(e);
+  };
+  const handlePop = () => {
+    setInProcess(!inProcess);
   };
 
   const reset = (e) => {
@@ -113,6 +117,7 @@ const PostModal = (props) => {
                     </>
                   )
                 )}
+                {inProcess && <p>In process...</p>}
               </Editor>
             </SharedContent>
             <ShareCreation>
@@ -131,7 +136,7 @@ const PostModal = (props) => {
                 </AssetButton>
               </AttachAssets>
               <ShareComment>
-                <AssetButton>
+                <AssetButton onClick={handlePop}>
                   <img
                     src="/images/sharecomment-icon.svg"
                     style={{ width: 20, height: 20 }}

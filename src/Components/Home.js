@@ -15,13 +15,13 @@ const Home = (props) => {
       <Header />
       <Container>
         <Section>
-          <h5>
+          {/* <h5>
             <a>Hiring in a hurry? - </a>
           </h5>
           <p>
             Find talented pros in record time with Upwork and keep business
             moving.
-          </p>
+          </p> */}
         </Section>
         <Layout>
           <Leftside></Leftside>
@@ -46,7 +46,9 @@ const Content = styled.div`
 `;
 
 const Section = styled.section`
-  min-height: 50px;
+  margin-bottom: -38px
+    ${
+      "" /* min-height: 50px;
   padding: 16px 0;
   box-sizing: content-box;
   text-align: center;
@@ -70,7 +72,8 @@ const Section = styled.section`
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 0 5px;
-  }
+  } */
+    };
 `;
 const Layout = styled.div`
   display: grid;

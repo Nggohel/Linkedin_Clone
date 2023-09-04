@@ -7,26 +7,6 @@ import ReactPlayer from "react-player";
 const Main = (props) => {
   const [showModel, setShowModel] = useState("close");
 
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   if (e.target !== e.currentTarget) {
-  //     return;
-  //   }
-
-  //   switch (showModel) {
-  //     case "open":
-  //       setShowModel("close");
-  //       break;
-  //     case "close":
-  //       setShowModel("open");
-  //       break;
-  //     default:
-  //       setShowModel("close");
-  //       break;
-  //   }
-  //   console.log("showModel updated to:", showModel);
-  // };
-
   useEffect(() => {
     props.getArticleAPI();
   }, []);
@@ -76,82 +56,105 @@ const Main = (props) => {
               </button>
             </div>
           </ShareBox>
-
-          <Content>
-            {props.loading && <img src="./images/Iphone-spinner.gif" />}
-            {props.articles.length > 0 &&
-              props.articles.map((article, key) => (
-                <Article key={key}>
-                  <SharedActor>
-                    <a>
-                      <img src={article.actor.image} alt="" />
-                      <div>
-                        <span>{article.actor.title}</span>
-                        <span>{article.actor.description}</span>
-                        <span>
-                          {article.actor.date.toDate().toLocaleDateString()}
-                        </span>
-                      </div>
-                    </a>
-                    <button>
-                      <img src="/images/ellipsis.svg" alt="" />
-                    </button>
-                  </SharedActor>
-                  <Description>{article.description}</Description>
-                  <SharedImg>
-                    <a>
-                      {!article.sharedImg && article.video ? (
-                        <ReactPlayer width={"100%"} url={article.video} />
-                      ) : (
-                        article.sharedImg && <img src={article.sharedImg} />
-                      )}
-                    </a>
-                  </SharedImg>
-                  <SocialCounts>
-                    <li>
+          <ScrollableContainer>
+            <Content>
+              {props.loading && <img src="./images/Iphone-spinner.gif" />}
+              {props.articles.length > 0 &&
+                props.articles.map((article, key) => (
+                  <Article key={key}>
+                    <SharedActor>
+                      <a>
+                        <img src={article.actor.image} alt="" />
+                        <div>
+                          <span>{article.actor.title}</span>
+                          <span>{article.actor.description}</span>
+                          <span>
+                            {article.actor.date.toDate().toLocaleDateString()}
+                          </span>
+                        </div>
+                      </a>
+                      <button>
+                        <img src="/images/ellipsis.svg" alt="" />
+                      </button>
+                    </SharedActor>
+                    <Description>{article.description}</Description>
+                    <SharedImg>
+                      <a>
+                        {!article.sharedImg && article.video ? (
+                          <ReactPlayer width={"100%"} url={article.video} />
+                        ) : (
+                          article.sharedImg && <img src={article.sharedImg} />
+                        )}
+                      </a>
+                    </SharedImg>
+                    <SocialCounts>
+                      <li>
+                        <button>
+                          <img
+                            src="https://www.userflow.nl/images/Linkedin-Like-Icon-Thumbup500.png"
+                            style={{ height: 24, width: 24 }}
+                          ></img>
+                          <img
+                            src="https://static.licdn.com/sc/h/4vr7dcac5wuy4nwsxxx8tf9e7"
+                            alt="celebrate"
+                          ></img>
+                          <span>75</span>
+                        </button>
+                      </li>
+                      <li>
+                        <a>{article.comments}</a>
+                      </li>
+                    </SocialCounts>
+                    <SocialAction>
                       <button>
                         <img
-                          src="https://www.userflow.nl/images/Linkedin-Like-Icon-Thumbup500.png"
-                          style={{ height: 24, width: 24 }}
+                          src="/images/like-icon.png"
+                          alt="like-icon"
+                          style={{ width: 20, height: 23 }}
                         ></img>
-                        <img
-                          src="https://static.licdn.com/sc/h/4vr7dcac5wuy4nwsxxx8tf9e7"
-                          alt="celebrate"
-                        ></img>
-                        <span>75</span>
+                        <span>Like</span>
                       </button>
-                    </li>
-                    <li>
-                      <a>{article.comments}</a>
-                    </li>
-                  </SocialCounts>
-                  <SocialAction>
-                    <button>
-                      <img src="/images/like-icon.svg" alt="celebrate"></img>
-                      <span>like</span>
-                    </button>
-                    <button>
-                      <img src="/images/comment-icon.svg" alt="celebrate"></img>
-                      <span>comment</span>
-                    </button>
-                    <button>
-                      <img src="/images/repost-icon.svg" alt=""></img>
-                      <span>repost</span>
-                    </button>
-                    <button>
-                      <img src="/images/share-icon.svg" alt="celebrate"></img>
-                      <span>share</span>
-                    </button>
-                  </SocialAction>
-                </Article>
-              ))}
-          </Content>
+                      <button>
+                        <img
+                          src="/images/comments-icon.png"
+                          alt="comment-icon"
+                          style={{ width: 20, height: 23 }}
+                        ></img>
+                        <span>Comment</span>
+                      </button>
+                      <button>
+                        <img
+                          src="/images/retweet-icon.png"
+                          alt="repost-icon"
+                          style={{ width: 20, height: 23 }}
+                        ></img>
+                        <span>Repost</span>
+                      </button>
+                      <button>
+                        <img
+                          src="/images/share-icon.png"
+                          alt="share-icon"
+                          style={{ width: 20, height: 23 }}
+                        ></img>
+                        <span>Share</span>
+                      </button>
+                    </SocialAction>
+                  </Article>
+                ))}
+            </Content>
+          </ScrollableContainer>
           <PostModal showModel={showModel} handleClick={handleClick} />
         </Container>
       )}
     </>
   );
 };
+
+const ScrollableContainer = styled.div`
+  overflow-y: scroll;
+  max-height: calc(100vh - 200px);
+  padding-right: 12px;
+`;
 
 const Container = styled.div`
   grid-area: main;
@@ -199,7 +202,7 @@ const ShareBox = styled(CommonCard)`
         margin: 4px 0;
         flex-grow: 1;
         border-radius: 35px;
-        padding-left: 16px;
+        padding-left: 18px;
         border: 1px solid rgba(0, 0, 0, 0.15);
         background-color: white;
         text-align: left;
@@ -329,9 +332,18 @@ const SocialAction = styled.div`
     align-items: center;
     padding: 8px;
     color: #0a66c2;
+    background-color: transparent;
+    border: none;
+    span {
+      margin-left: 5px;
+    }
 
     @media (min-width: 768px) {
       margin-left: 8px;
+
+      span {
+        margin-left: 5px;
+      }
     }
   }
 `;
